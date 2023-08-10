@@ -18,6 +18,8 @@ public class UserArticleController {
 	public UserArticleController() {
 		articles = new ArrayList<>();
 		lastArticleId = 0;
+		
+		makeTestData();
 	}
 	
 	@RequestMapping("/user/article/doAdd")
@@ -36,6 +38,12 @@ public class UserArticleController {
 	@ResponseBody
 	public List<Article> getArticles() {
 		return articles;
+	}
+	
+	private void makeTestData() {
+		for(int i = 1; i < 11; i++) {
+			doAdd("제목"+i,"내용"+i);
+		}
 	}
 
 }
