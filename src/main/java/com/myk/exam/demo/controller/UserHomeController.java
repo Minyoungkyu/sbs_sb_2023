@@ -7,29 +7,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserHomeController {
 	
-	private static int viewCount = 0;
+	private static int Count;
 	
-	@RequestMapping("/user/home/main")
-	@ResponseBody
-	public String showMain() {
-		return "안녕하세요";
+	public UserHomeController() {
+		Count = 0;
 	}
 	
-	@RequestMapping("/user/home/main2") 
+	@RequestMapping("/user/home/getCount")
 	@ResponseBody
-	public String showmain2() {
-		return "반갑습니다";
+	public int getCount() {
+		return Count++; 
 	}
 	
-	@RequestMapping("/user/home/main3") 
+	@RequestMapping("/user/home/doSetCount")
 	@ResponseBody
-	public String showmain3() {
-		return "또 만나유";
+	public String setCount(int count) {
+		this.Count = count;
+		return "카운트 값이 " + this.Count + " 로 초기화";
 	}
 	
-	@RequestMapping("/user/home/main4")
-	@ResponseBody
-	public int showMain4() {
-		return viewCount++; 
-	}
+	
 }
