@@ -2,48 +2,62 @@ package com.myk.exam.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myk.exam.demo.service.ArticleService;
 import com.myk.exam.demo.vo.Article;
 
 @Controller
 public class UserArticleController {
 	
-	private List<Article> articles;
-	private int lastArticleId;
 	
-	public UserArticleController() {
-		articles = new ArrayList<>();
-		lastArticleId = 0;
-		
-		makeTestData();
+	private final ArticleService articleService;
+	
+	@Autowired
+	public UserArticleController(ArticleService articleService) {
+		this.articleService = articleService;
 	}
+	
 	
 	@RequestMapping("/user/article/doAdd")
 	@ResponseBody
-	public Article doAdd(String title, String body) {
-		
-		Article article = new Article(++lastArticleId, title, body);
-		
-		articles.add(article);
-		
-		return article;
+	public String doAdd(String title, String body) {
+		return articleService.doAdd(title, body);
 		
 	}
 	
 	@RequestMapping("/user/article/getArticles")
 	@ResponseBody
 	public List<Article> getArticles() {
-		return articles;
+		return articleService.getArticles();
 	}
 	
-	private void makeTestData() {
-		for(int i = 1; i < 11; i++) {
-			doAdd("제목"+i,"내용"+i);
-		}
+	@RequestMapping("/user/article/doDelete")
+	@ResponseBody
+	public String doDelete(int id) {
+		
+		return articleService.doDelete(id);
 	}
 
+	
+	@RequestMapping("/user/article/doModify")
+	@ResponseBody
+	public String doModify(int id, String title, String body) {
+		
+		return articleService.doModify(id, title, body);
+		
+	}
+	
+	@RequestMapping("/user/article/getArticle")
+	@ResponseBody
+	public Optional<Article> getArticleAction(int id) {
+		
+		return articleService.getArticle(id);
+	}
+			
 }
