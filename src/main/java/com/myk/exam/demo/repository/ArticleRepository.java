@@ -15,19 +15,19 @@ import com.myk.exam.demo.vo.Article;
 @Mapper
 public interface ArticleRepository {
 	
-	@Insert("INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = #{title}, `body`= #{body}")
+//	@Insert("INSERT INTO article SET regDate = NOW(), updateDate = NOW(), title = #{title}, `body`= #{body}")
 	void doAdd(@Param("title")String title, @Param("body")String body);
 		
-	@Select("SELECT * FROM article")
+//	@Select("SELECT * FROM article")
 	List<Article> getArticles();
 	
-	@Delete("DELETE FROM article WHERE id = #{id}")
+//	@Delete("DELETE FROM article WHERE id = #{id}")
 	void doDelete(@Param("id")int id);
 	
-	@Update("UPDATE article SET title = #{title}, `body` = #{body} WHERE id = #{id}")
+//	@Update("UPDATE article SET title = #{title}, `body` = #{body} WHERE id = #{id}")
 	void doModify(@Param("id")int id, @Param("title")String title, @Param("body") String body);
 	
-	@Select("SELECT * FROM article WHERE id = #{id}")
+//	@Select("SELECT * FROM article WHERE id = #{id}")
 	Optional<Article> getArticle(@Param("id")int id);
 
 
